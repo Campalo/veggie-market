@@ -8,6 +8,8 @@ import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
 import { useTypography } from './src/theme/typography';
 
+// TO CHECK: How to handle navigation with react-native/web because we don't use link with react-navigation/native
+
 type RootStackParamList = {
   Home: undefined;
   Create: undefined;
