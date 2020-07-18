@@ -70,7 +70,10 @@ function CreateScreen({navigation}: CreateScreenProps) {
     <View>
       <Text>... forms are coming</Text>
       <Button
-        onPress={() => createDoc("products")}
+        onPress={async () => {
+          await createDoc("products"),
+          navigation.goBack()
+        }}
         title= "Save"
         accessibilityLabel="Save the new product to the list"
       />
