@@ -1,12 +1,24 @@
 import 'react-native-gesture-handler';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { StyleSheet, Text, View, Image, Button, FlatList, SafeAreaView } from 'react-native';
-import {useCollection, createDoc} from "./src/firestore";
+import { useCollection, createDoc } from "./src/firestore";
+import { useTheme, ThemeContext, ThemeMode } from './src/theme';
 
 export default function App() {
+  const [mode, setMode] = useState<ThemeMode>('light');
+  return (
+    <ThemeContext.Provider value={[mode, setMode]}>
+    <NavigationContainer>
+      <Home />
+    </NavigationContainer>
+    </ThemeContext.Provider>
+  );
+}
+
+function Home() {
   const products = useCollection("products");
+  const [{ app, text, title, subtitle }, toggleMode] = useTheme();
 
   const renderProduct = ({ item }: any) => (
       <View style={styles.item}>
@@ -18,7 +30,6 @@ export default function App() {
   )
 
   return (
-    <NavigationContainer>
       <SafeAreaView style={styles.container}>
         <FlatList
         data={products}
@@ -31,8 +42,8 @@ export default function App() {
         title = "Add"
         accessibilityLabel="Add a new product to the list"
       />
+      <Button title="Change Theme" onPress={toggleMode} />
       </SafeAreaView>
-    </NavigationContainer>
   );
 }
 
