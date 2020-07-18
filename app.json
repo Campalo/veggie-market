@@ -1,0 +1,12 @@
+{
+  "name": "VeggieMarket",
+  "displayName": "VeggieMarket",
+  "expo": {
+    "name": "VeggieMarket",
+    "slug": "VeggieMarket",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
