@@ -1,10 +1,21 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, StackScreenProps } from "@react-navigation/stack";
 import { StyleSheet, Text, View, Image, Button, FlatList, SafeAreaView } from 'react-native';
 import { useCollection, createDoc } from "./src/firestore";
 import { useTheme, ThemeContext, ThemeMode } from './src/theme';
+
+type RootStackParamList = {
+  Home: undefined;
+  Create: undefined;
+  Edit: undefined;
+}
+
+type HomeScreenProps = StackScreenProps<RootStackParamList, 'Home'>
+type CreateScreenProps = StackScreenProps<RootStackParamList, 'Create'>
+type EditScreenProps = StackScreenProps<RootStackParamList, 'Edit'>
+
 
 const Stack = createStackNavigator();
 
@@ -15,6 +26,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Dashboard'}}/>
+          <Stack.Screen name="Create" component={CreateScreen} options={{ title: 'Create your product'}}/>
           <Stack.Screen name="Edit" component={EditScreen} options={{ title: 'Edit your product'}}/>
         </Stack.Navigator>
       </NavigationContainer>
@@ -22,7 +34,7 @@ export default function App() {
   );
 }
 
-function HomeScreen() {
+function HomeScreen({navigation}: HomeScreenProps) {
   const products = useCollection("products");
   const [{ app, text, title, subtitle }, toggleMode] = useTheme();
 
@@ -44,7 +56,7 @@ function HomeScreen() {
         >
         </FlatList>
         <Button
-          onPress={ () => createDoc("products")}
+          onPress={ () => navigation.navigate('Create')}
           title = "Add"
           accessibilityLabel="Add a new product to the list"
         />
@@ -53,10 +65,23 @@ function HomeScreen() {
   );
 }
 
-function EditScreen() {
+function CreateScreen({navigation}: CreateScreenProps) {
   return (
     <View>
       <Text>... forms are coming</Text>
+      <Button
+        onPress={() => createDoc("products")}
+        title= "Save"
+        accessibilityLabel="Save the new product to the list"
+      />
+    </View>
+  )
+}
+
+function EditScreen({navigation}: EditScreenProps) {
+  return (
+    <View>
+      <Text>... forms with current values are coming</Text>
     </View>
   )
 }
