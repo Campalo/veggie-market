@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
-import { Button, SafeAreaView } from 'react-native';
+import { Button, SafeAreaView, StyleSheet } from 'react-native';
 import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
 import { useTypography } from './src/theme/typography';
 

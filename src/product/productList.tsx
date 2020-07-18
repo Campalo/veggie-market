@@ -1,15 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button, FlatList, SafeAreaView } from 'react-native';
 import { useCollection } from "../firestore";
-import { useTypography } from '../theme/typography';
-import { useNavigation } from '@react-navigation/native';
+import { Link } from '@react-navigation/native';
 import { useList } from '../theme/list';
+import { useButton } from '../theme/button';
 
 function ProductList() {
   const products = useCollection("products");
-  const navigation = useNavigation();
-  const { text, subtitle } = useTypography();
   const { list, listItem, itemTitle, itemSubtitle, itemAvatar } = useList();
+  const { button } = useButton();
 
   const renderProduct = ({ item }: any) => (
     <View style={listItem}>
@@ -26,36 +25,16 @@ function ProductList() {
   )
 
   return(
-    <View>
+    <View style={{flex: 1}}>
         <FlatList style={list}
             data={products}
             renderItem={renderProduct}
             keyExtractor={item => item.id}
         >
         </FlatList>
-        <Button
-            onPress={() => navigation.navigate('Create')}
-            title="Add"
-            accessibilityLabel="Add a new product to the list"
-        />
+        <Link style={button} to="/Create">Add</Link>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-    item: {
-      display: "flex",
-      flexDirection: "column",
-      backgroundColor: "lightgrey",
-      borderRadius: 4,
-      padding: 20,
-      margin: 10,
-    },
-    avatar: {
-      borderRadius: 50,
-      width: 100,
-      height: 100,
-    }
-  });
 
 export default ProductList;
