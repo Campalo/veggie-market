@@ -7,6 +7,7 @@ import { useCollection, createDoc } from "./src/firestore";
 import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
 import { useTypography } from './src/theme/typography';
+import { useList } from './src/theme/list';
 
 type RootStackParamList = {
   Home: undefined;
@@ -33,7 +34,8 @@ export default function App() {
             <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Dashboard' }} />
             <Stack.Screen name="Create" component={CreateScreen} options={{ title: 'Create your product' }} />
             <Stack.Screen name="Edit" component={EditScreen} options={{ title: 'Edit your product' }} />
-          </Stack.Navigator>        </NavigationContainer>
+          </Stack.Navigator>
+        </NavigationContainer>
       </ThemeContext.Provider>
     </AppearanceProvider>
   );
@@ -42,20 +44,25 @@ export default function App() {
 function HomeScreen({ navigation }: HomeScreenProps) {
   const products = useCollection("products");
   const { app, text, subtitle } = useTypography();
+  const { list, listItem, itemTitle, itemSubtitle, itemAvatar } = useList();
   const toggleMode = useToggleMode();
 
   const renderProduct = ({ item }: any) => (
-    <View style={styles.item}>
-      <Image style={styles.avatar} source={{ uri: item.image }} />
-      <Text style={subtitle}>{item.name}</Text>
-      <Text style={text}>{item.price} euros / {item.unit}</Text>
-      <Text style={text}>{item.stock} {item.unit} in stock</Text>
+    <View style={listItem}>
+      <Image style={itemAvatar} source={{ uri: item.image }} />
+      <View>
+        <Text style={itemTitle}>{item.name}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={itemSubtitle}>{item.price} euros / {item.unit}</Text>
+          <Text style={itemSubtitle}>{item.stock} {item.unit} in stock</Text>
+        </View>
+      </View>
     </View>
   )
 
   return (
     <SafeAreaView style={app}>
-      <FlatList
+      <FlatList style={list}
         data={products}
         renderItem={renderProduct}
         keyExtractor={item => item.id}
