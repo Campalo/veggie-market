@@ -9,13 +9,14 @@ import { useTypography } from './src/theme/typography';
 import ProductList from "./src/product/productList";
 import CreateScreen from './src/product/createProduct';
 import EditScreen from './src/product/editProduct';
+import { ColorSchemeName } from 'react-native-appearance';
 
 // TO CHECK: How to handle navigation with react-native/web because we don't use link with react-navigation/native
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [mode, setMode] = useState("dark");
+  const [mode, setMode] = useState<ColorSchemeName>("dark");
 
   return (
       <ThemeContext.Provider value={[mode, setMode]}>

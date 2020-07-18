@@ -2,6 +2,10 @@ import { Theme } from '@react-navigation/native';
 import { ColorSchemeName } from 'react-native-appearance';
 import { createContext, useContext } from 'react';
 
+export const density = 8;
+export const radius = density * 0.5;
+
+
 export const dark: Theme = {
   dark: true,
   colors: {
@@ -9,7 +13,7 @@ export const dark: Theme = {
     background: '#1D313F',
     text: '#FFFFFF',
     card: '#234051',
-    border: '#000000',
+    border: 'transparent',
     notification: '#234051' // Same as card for now
   }
 };
@@ -17,11 +21,11 @@ export const dark: Theme = {
 export const light: Theme = {
   dark: false,
   colors: {
-    primary: '#97BF16',
+    primary: '#45F1A7',
     background: '#EEEFF4',
     text: '#2D2D2D',
     card: '#FBFBFB',
-    border: '#000000',
+    border: 'transparent',
     notification: '#FBFBFB' // Same as card for now
   }
 };
