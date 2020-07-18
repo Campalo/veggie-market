@@ -8,6 +8,8 @@ import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
 import { useTypography } from './src/theme/typography';
 
+import ProductList from "./src/product/productList";
+
 // TO CHECK: How to handle navigation with react-native/web because we don't use link with react-navigation/native
 
 type RootStackParamList = {
@@ -35,40 +37,19 @@ export default function App() {
             <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Dashboard' }} />
             <Stack.Screen name="Create" component={CreateScreen} options={{ title: 'Create your product' }} />
             <Stack.Screen name="Edit" component={EditScreen} options={{ title: 'Edit your product' }} />
-          </Stack.Navigator>        </NavigationContainer>
+          </Stack.Navigator>
+        </NavigationContainer>
       </ThemeContext.Provider>
     </AppearanceProvider>
   );
 }
 
-function HomeScreen({ navigation }: HomeScreenProps) {
-  const products = useCollection("products");
-  const { app, text, subtitle } = useTypography();
-  const toggleMode = useToggleMode();
-
-  const renderProduct = ({ item }: any) => (
-    <View style={styles.item}>
-      <Image style={styles.avatar} source={{ uri: item.image }} />
-      <Text style={subtitle}>{item.name}</Text>
-      <Text style={text}>{item.price} euros / {item.unit}</Text>
-      <Text style={text}>{item.stock} {item.unit} in stock</Text>
-    </View>
-  )
+function HomeScreen() {
+  const { app } = useTypography();
 
   return (
     <SafeAreaView style={app}>
-      <FlatList
-        data={products}
-        renderItem={renderProduct}
-        keyExtractor={item => item.id}
-      >
-      </FlatList>
-      <Button
-        onPress={() => navigation.navigate('Create')}
-        title="Add"
-        accessibilityLabel="Add a new product to the list"
-      />
-      <Button title="Change Theme" onPress={toggleMode} />
+      <ProductList />
     </SafeAreaView>
   );
 }
