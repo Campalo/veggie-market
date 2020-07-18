@@ -72,17 +72,14 @@ function HomeScreen({ navigation }: HomeScreenProps) {
 }
 
 function CreateScreen({ navigation }: CreateScreenProps) {
+  const add = async () => {
+    await createDoc("products");
+    navigation.goBack();
+  }
   return (
     <View>
       <Text>... forms are coming</Text>
-      <Button
-        onPress={async () => {
-          await createDoc("products"),
-            navigation.goBack()
-        }}
-        title="Save"
-        accessibilityLabel="Save the new product to the list"
-      />
+      <Button title="Save" onPress={add} accessibilityLabel="Save the new product to the list" />
     </View>
   )
 }
