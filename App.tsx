@@ -23,14 +23,14 @@ function Home() {
   const renderProduct = ({ item }: any) => (
       <View style={styles.item}>
         <Image style={styles.avatar} source={{ uri: item.image}}/>
-        <Text>{item.name}</Text>
-        <Text>{item.price} euros / {item.unit}</Text>
-        <Text>{item.stock} {item.unit} in stock</Text>
+        <Text style={subtitle}>{item.name}</Text>
+        <Text style={text}>{item.price} euros / {item.unit}</Text>
+        <Text style={text}>{item.stock} {item.unit} in stock</Text>
       </View>
   )
 
   return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={app}>
         <FlatList
         data={products}
         renderItem={renderProduct}
