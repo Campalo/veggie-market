@@ -1,22 +1,28 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text, View, Image, Button, FlatList, SafeAreaView } from 'react-native';
 import { useCollection, createDoc } from "./src/firestore";
 import { useTheme, ThemeContext, ThemeMode } from './src/theme';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   const [mode, setMode] = useState<ThemeMode>('light');
   return (
     <ThemeContext.Provider value={[mode, setMode]}>
-    <NavigationContainer>
-      <Home />
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Dashboard'}}/>
+          <Stack.Screen name="Edit" component={EditScreen} options={{ title: 'Edit your product'}}/>
+        </Stack.Navigator>
+      </NavigationContainer>
     </ThemeContext.Provider>
   );
 }
 
-function Home() {
+function HomeScreen() {
   const products = useCollection("products");
   const [{ app, text, title, subtitle }, toggleMode] = useTheme();
 
@@ -37,14 +43,22 @@ function Home() {
         keyExtractor={ item => item.id}
         >
         </FlatList>
-      <Button
-        onPress={ () => createDoc("products")}
-        title = "Add"
-        accessibilityLabel="Add a new product to the list"
-      />
+        <Button
+          onPress={ () => createDoc("products")}
+          title = "Add"
+          accessibilityLabel="Add a new product to the list"
+        />
       <Button title="Change Theme" onPress={toggleMode} />
       </SafeAreaView>
   );
+}
+
+function EditScreen() {
+  return (
+    <View>
+      <Text>... forms are coming</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
