@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {useCollection} from "./src/firestore";
 
 export default function App() {
+  const products = useCollection();
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>{products.map(product => product.name).join(", ")}</Text>
       <StatusBar style="auto" />
     </View>
   );

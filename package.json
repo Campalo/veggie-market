@@ -12,6 +12,7 @@
     "expo-splash-screen": "~0.4.0",
     "expo-status-bar": "^1.0.0",
     "expo-updates": "~0.2.8",
+    "firebase": "^7.16.1",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "~0.62.2",
@@ -27,6 +28,7 @@
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.61.23",
     "babel-preset-expo": "~8.2.0",
+    "firebase-tools": "^8.6.0",
     "jest-expo": "~38.0.0",
     "typescript": "~3.9.5"
   },
