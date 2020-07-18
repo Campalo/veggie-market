@@ -3,25 +3,32 @@ import { useTheme, Theme } from '@react-navigation/native';
 
 const list = (colors: Theme['colors']) => StyleSheet.create({
   list: {
-    backgroundColor: colors.card,
-    display: 'flex',
     flexDirection: 'column',
   },
   listItem: {
-    display: 'flex',
+    backgroundColor: colors.card,
     flexDirection: 'row',
-    padding: 12,
+    alignItems: 'center',
+    borderRadius: 4,
+    marginTop: 8,
+    marginLeft: 8,
+    marginRight: 8,
+    padding: 8,
+  },
+  itemAvatar: {
+    height: 40,
+    width: 40,
+    marginRight: 16,
+    borderRadius: 50
   },
   itemTitle: {
-    display: 'flex',
     fontWeight: '300',
-    fontSize: 24,
+    fontSize: 16,
     color: colors.text
   },
   itemSubtitle: {
-    display: 'flex',
     fontWeight: '100',
-    fontSize: 20,
+    fontSize: 12,
     color: colors.text
   }
 });

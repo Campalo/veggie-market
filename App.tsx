@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { Button, SafeAreaView } from 'react-native';
-import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
 import { useTypography } from './src/theme/typography';
 
@@ -16,11 +15,9 @@ import EditScreen from './src/product/editProduct';
 const Stack = createStackNavigator();
 
 export default function App() {
-  const scheme = useColorScheme();
-  const [mode, setMode] = useState(scheme);
+  const [mode, setMode] = useState("dark");
 
   return (
-    <AppearanceProvider>
       <ThemeContext.Provider value={[mode, setMode]}>
         <NavigationContainer theme={getTheme(mode)}>
           <Stack.Navigator>
@@ -30,7 +27,6 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeContext.Provider>
-    </AppearanceProvider>
   );
 }
 

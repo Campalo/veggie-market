@@ -3,24 +3,31 @@ import { StyleSheet, Text, View, Image, Button, FlatList, SafeAreaView } from 'r
 import { useCollection } from "../firestore";
 import { useTypography } from '../theme/typography';
 import { useNavigation } from '@react-navigation/native';
+import { useList } from '../theme/list';
 
 function ProductList() {
   const products = useCollection("products");
-  const { text, subtitle } = useTypography();
   const navigation = useNavigation();
+  const { text, subtitle } = useTypography();
+  const { list, listItem, itemTitle, itemSubtitle, itemAvatar } = useList();
 
   const renderProduct = ({ item }: any) => (
-    <View style={styles.item}>
-      <Image style={styles.avatar} source={{ uri: item.image }} />
-      <Text style={subtitle}>{item.name}</Text>
-      <Text style={text}>{item.price} euros / {item.unit}</Text>
-      <Text style={text}>{item.stock} {item.unit} in stock</Text>
+    <View style={listItem}>
+      <Image style={itemAvatar} source={{ uri: item.image }} />
+      <View>
+        <Text style={itemTitle}>{item.name}</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={itemSubtitle}>{item.price}€ / {item.unit}</Text>
+          <Text style={itemSubtitle}> - </Text>
+          <Text style={itemSubtitle}>{item.stock} {item.unit} in stock</Text>
+        </View>
+      </View>
     </View>
   )
 
   return(
     <View>
-        <FlatList
+        <FlatList style={list}
             data={products}
             renderItem={renderProduct}
             keyExtractor={item => item.id}
