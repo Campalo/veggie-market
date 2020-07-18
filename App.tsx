@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import {useCollection} from "./src/firestore";
 
 export default function App() {
-  const products = useCollection();
+  const products = useCollection("products");
   return (
     <View style={styles.container}>
       <Text>{products.map(product => product.name).join(", ")}</Text>

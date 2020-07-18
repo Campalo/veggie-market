@@ -1,4 +1,4 @@
-import firebase from "firebase";
+import {firestore, initializeApp} from "firebase";
 import "firebase/firestore";
 import {useState, useEffect} from "react";
 
@@ -13,19 +13,19 @@ const firebaseConfig = {
     measurementId: "G-STGW946JTW"
   };
 
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
-export const useCollection = () => {
-    const [products, setProducts] = useState<any[]>([]);
+export const useCollection = (collectionName: string) => {
+    const [values, setValues] = useState<any[]>([]);
     useEffect( () => {
-        firebase.firestore().collection("products").onSnapshot((snapshot) => {
+        return firestore().collection(collectionName).onSnapshot((snapshot) => {
             const data = dataCollection(snapshot)
-            setProducts(data);
-        })
-    }, [])
-    return products;
+            setValues(data);
+        });
+    }, [collectionName])
+    return values;
 }
 
-const dataCollection = (snapshot: firebase.firestore.QuerySnapshot) => {
+const dataCollection = (snapshot: firestore.QuerySnapshot) => {
     return snapshot.docs.map( doc => doc.data());
 }
