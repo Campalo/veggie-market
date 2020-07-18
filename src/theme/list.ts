@@ -8,6 +8,7 @@ const list = (colors: Theme['colors']) => StyleSheet.create({
   listItem: {
     backgroundColor: colors.card,
     flexDirection: 'row',
+    alignItems: 'center',
     borderRadius: 4,
     marginTop: 8,
     marginLeft: 8,

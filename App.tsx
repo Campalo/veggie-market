@@ -53,7 +53,8 @@ function HomeScreen({ navigation }: HomeScreenProps) {
       <View>
         <Text style={itemTitle}>{item.name}</Text>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={itemSubtitle}>{item.price} euros / {item.unit}</Text>
+          <Text style={itemSubtitle}>{item.price}€ / {item.unit}</Text>
+          <Text style={itemSubtitle}> - </Text>
           <Text style={itemSubtitle}>{item.stock} {item.unit} in stock</Text>
         </View>
       </View>
