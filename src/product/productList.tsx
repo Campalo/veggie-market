@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, Button, FlatList, SafeAreaView } from 'react-native';
 import { useCollection } from "../firestore";
-import { useToggleMode } from '../theme/theme';
 import { useTypography } from '../theme/typography';
 import { useNavigation } from '@react-navigation/native';
 
 function ProductList() {
   const products = useCollection("products");
   const { text, subtitle } = useTypography();
-  const toggleMode = useToggleMode();
   const navigation = useNavigation();
 
   const renderProduct = ({ item }: any) => (
@@ -33,7 +31,6 @@ function ProductList() {
             title="Add"
             accessibilityLabel="Add a new product to the list"
         />
-        <Button title="Change Theme" onPress={toggleMode} />
     </View>
   )
 }
