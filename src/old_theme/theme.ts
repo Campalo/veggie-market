@@ -1,6 +1,4 @@
-import { StyleSheet } from "react-native";
-import { createContext, useContext, useState } from "react";
-
+import { createContext, useContext } from "react";
 
 function brightness(color: string, amount: number) {
   
@@ -35,7 +33,7 @@ function brightness(color: string, amount: number) {
 export const darken = (color: string) => brightness(color, -20);
 export const lighten = (color: string) => brightness(color, 20);
 
-interface ThemeColor {
+export interface ThemeColor {
   primary: string,
   secondary: string,
   background: string,
@@ -61,46 +59,31 @@ export const dark: ThemeColor = {
 
 const themeColor = { light, dark };
 
-const dynamicTheme = (colors: ThemeColor) => StyleSheet.create({
-  app: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  title: {
-    display: 'flex',
-    fontWeight: '300',
-    fontSize: 24,
-    color: darken(colors.foreground)
-  },
-  subtitle: {
-    display: 'flex',
-    fontWeight: '100',
-    fontSize: 20,
-    color: lighten(colors.foreground)
-  },
-  text: {
-    fontWeight: 'normal',
-    fontSize: 16,
-    color: colors.foreground
-  },
-  primary: {
-    backgroundColor: colors.primary,
-  }
-});
 
-export type Theme = ReturnType<typeof dynamicTheme>;
+
 export type ThemeMode = keyof typeof themeColor;
 
 
 export const ThemeContext = createContext<[ThemeMode, (mode: ThemeMode) => void]>(['light', (mode) => mode]);
 
-export function useTheme(forceMode?: ThemeMode): [Theme, () => void] {
-  const [mode, setMode] = useContext(ThemeContext);
-  const toggleMode = mode === 'light' ? () => setMode('dark') : () => setMode('light');
-  return [
-    dynamicTheme(themeColor[forceMode || mode]),
-    toggleMode
-  ];
+export function useMode() {
+  return useContext(ThemeContext);
 }
 
+export function toggleMode() {
+  const [mode, setMode] = useContext(ThemeContext);
+  mode === 'light' ? setMode('dark') : setMode('light');
+}
+
+export function useTheme<T>(
+  getTheme: (colors: ThemeColor) => T,
+  forceMode?: ThemeMode
+): T {
+  if (forceMode) {
+    return getTheme(themeColor[forceMode])
+  } else {
+    const [mode] = useContext(ThemeContext);
+    return getTheme(themeColor[mode]);
+  }
+}
 
