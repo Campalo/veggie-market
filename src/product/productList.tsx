@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Button, FlatList, SafeAreaView } from 'react-native';
+import { Text, View, Image, FlatList } from 'react-native';
 import { useCollection } from "../firestore";
 import { Link } from '@react-navigation/native';
 import { useList } from '../theme/list';
