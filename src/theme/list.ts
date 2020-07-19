@@ -1,12 +1,13 @@
 import { StyleSheet } from "react-native";
-import { useTheme, Theme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
+import { Theme } from './theme';
 
-const list = (colors: Theme['colors']) => StyleSheet.create({
+const list = (theme: Theme) => StyleSheet.create({
   list: {
     flexDirection: 'column',
   },
   listItem: {
-    backgroundColor: colors.card,
+    backgroundColor: theme.colors.card,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 4,
@@ -24,16 +25,16 @@ const list = (colors: Theme['colors']) => StyleSheet.create({
   itemTitle: {
     fontWeight: '300',
     fontSize: 16,
-    color: colors.text
+    color: theme.colors.text
   },
   itemSubtitle: {
     fontWeight: '100',
     fontSize: 12,
-    color: colors.text
+    color: theme.colors.text
   }
 });
 
 export function useList() {
-  const { colors } = useTheme();
-  return list(colors);
+  const theme = useTheme() as Theme;
+  return list(theme);
 }

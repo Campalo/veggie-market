@@ -1,35 +1,36 @@
 import { StyleSheet } from "react-native";
-import { useTheme, Theme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
+import { Theme } from './theme';
 
-export const typography = (colors: Theme['colors']) => StyleSheet.create({
+export const typography = (theme: Theme) => StyleSheet.create({
   app: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: theme.colors.background,
   },
   title: {
     display: 'flex',
     fontWeight: '300',
     fontSize: 24,
-    color: colors.text
+    color: theme.colors.text
   },
   subtitle: {
     display: 'flex',
     fontWeight: '100',
     fontSize: 20,
-    color: colors.text
+    color: theme.colors.text
   },
   text: {
     fontWeight: 'normal',
     fontSize: 16,
-    color: colors.text
+    color: theme.colors.text
   },
   primary: {
-    backgroundColor: colors.primary,
+    backgroundColor: theme.colors.primary,
   }
 });
 
 export type Typography = ReturnType<typeof typography>;
 export function useTypography() {
-  const { colors } = useTheme();
-  return typography(colors);
+  const theme = useTheme() as Theme;
+  return typography(theme);
 }

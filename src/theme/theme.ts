@@ -1,15 +1,22 @@
-import { Theme } from '@react-navigation/native';
+import { Theme as NavigationTheme } from '@react-navigation/native';
 import { ColorSchemeName } from 'react-native-appearance';
 import { createContext, useContext } from 'react';
 
 export const density = 8;
 export const radius = density * 0.5;
 
+export interface Theme {
+  dark: boolean;
+  colors: NavigationTheme['colors'] & {
+    secondary: string;
+  }
+}
 
 export const dark: Theme = {
   dark: true,
   colors: {
-    primary: '#4FF887',
+    primary: '#59BD48',
+    secondary: '#7B2968',
     background: '#1D313F',
     text: '#FFFFFF',
     card: '#234051',
@@ -22,6 +29,7 @@ export const light: Theme = {
   dark: false,
   colors: {
     primary: '#45F1A7',
+    secondary: '#7B2968',
     background: '#EEEFF4',
     text: '#2D2D2D',
     card: '#FBFBFB',
