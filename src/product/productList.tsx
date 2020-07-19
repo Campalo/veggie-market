@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { Text, View, Image, Button, FlatList, Animated } from 'react-native';
+import { Text, View, Image, Button, FlatList, Animated, Easing } from 'react-native';
 import { useCollection } from "../firestore";
 import { Link } from '@react-navigation/native';
 import { useList } from '../theme/list';
@@ -14,17 +14,26 @@ function ProductList() {
     return new Animated.Value(0);
   })
 
-  const animations = products.map((item, index) => {
+  const ItemAnimations = products.map((item, index) => {
       return (
         Animated.timing(initialValues[index], {
             toValue: 1,
             duration: 200,
+            easing: Easing.out(Easing.cubic),
             useNativeDriver: true,
         })
       )
   })
 
-  Animated.stagger(400, animations).start();
+  const initialValue = new Animated.Value(0);
+  const LinkAnimation = Animated.timing(initialValue, {
+      toValue: 1,
+      duration: 500,
+      easing: Easing.elastic(1),
+      useNativeDriver: true
+  });
+
+  Animated.stagger(400, [...ItemAnimations, LinkAnimation]).start();
 
 
   const renderProduct = ({ item , index}: any) => (
@@ -43,7 +52,7 @@ function ProductList() {
 
   return(
     <View style={{flex: 1}}>
-        <View            >
+        <View >
             <FlatList style={list}
                 data={products}
                 renderItem={renderProduct}
@@ -51,7 +60,9 @@ function ProductList() {
                 >
             </FlatList>
         </View>
-        <Link style={button} to="/Create">Add</Link>
+        <Animated.View key={products.length} style={{ transform: [{ scale: initialValue }], opacity: initialValue }}>
+            <Link style={button} to="/Create">Add</Link>
+        </Animated.View>
     </View>
   )
 }
