@@ -15,9 +15,9 @@ function CreateScreen() {
       <View>
         <Form onSubmit={add}>
           <Input name="name" />
-          <Input name="price" />
-          <Input name="stock" />
-          <Input name="unit" />
+          <Input name="price" type="decimal-pad" />
+          <Input name="stock" type="decimal-pad" />
+          <Input name="unit" type="decimal-pad" />
           <Submit>Save Product</Submit>
         </Form>
       </View>
