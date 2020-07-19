@@ -43,4 +43,3 @@ export const createDoc = (
         .withConverter(converter)
         .add(value);
 }
-

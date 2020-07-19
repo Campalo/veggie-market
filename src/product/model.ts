@@ -1,10 +1,11 @@
-interface FormProduct {
+export interface FormProduct {
   name: string;
   unit: string;
   price: string;
   stock: string;
 }
-interface Product {
+
+export interface Product {
   image: string;
   name: string;
   unit: string;

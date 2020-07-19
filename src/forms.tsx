@@ -1,4 +1,4 @@
-import React, { Children, FunctionComponent, cloneElement } from 'react';
+import React, { Children, FunctionComponent, cloneElement, ReactText } from 'react';
 import { TextInput, Button, TextInputProps } from "react-native";
 import { useForm, Controller, UseFormMethods } from "react-hook-form";
 import { Picker } from '@react-native-community/picker';
@@ -52,14 +52,14 @@ export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, 
     style: textInput,
     textContentType: type,
     placeholder
-  });
+  })
   return (
     <>
       <Controller
-        control={control}
-        render={(params) => <TextInput {...textInputProps(params)} />}
         name={name}
+        control={control}
         defaultValue={defaultValue}
+        render={(params) => <TextInput {...textInputProps(params)} />}
       />
     </>
   )
@@ -71,13 +71,12 @@ export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, 
 ////////////
 interface SelectProps {
   name: string;
-  placeholder: TextInputProps['placeholder']
   options: string[] | Record<string, string>;
   control?: UseFormMethods['control'];
   errors?: UseFormMethods['errors'];
   defaultValue?: string;
 }
-export const Select: FunctionComponent<SelectProps> = ({ name, options, placeholder, control, defaultValue }) => {
+export const Select: FunctionComponent<SelectProps> = ({ name, options, control, defaultValue }) => {
   const { textInput } = useInput();
   const itemProps = Array.isArray(options)
     ? options.map((option, i) => ({ value: option, label: option, key: i }))
@@ -85,10 +84,9 @@ export const Select: FunctionComponent<SelectProps> = ({ name, options, placehol
 
   const items = itemProps.map(props => <Picker.Item {...props} />);
   const pickerProps = ({ onChange, value }: any) => ({
+    onValueChange: (v: ReactText, index: number) => onChange(v),
     selectedValue: value,
-    onValueChange: onChange,
     style: textInput,
-    placeholder
   });
   return (
     <>
