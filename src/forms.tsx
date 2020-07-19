@@ -77,7 +77,7 @@ interface SelectProps {
   errors?: UseFormMethods['errors'];
   defaultValue?: string;
 }
-export const Select: FunctionComponent<SelectProps> = ({ options, placeholder, control, defaultValue }) => {
+export const Select: FunctionComponent<SelectProps> = ({ name, options, placeholder, control, defaultValue }) => {
   const { textInput } = useInput();
   const itemProps = Array.isArray(options)
     ? options.map((option, i) => ({ value: option, label: option, key: i }))
