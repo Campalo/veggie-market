@@ -33,13 +33,14 @@ const dataCollection = (snapshot: firestore.QuerySnapshot) => {
 }
 
 
-export const createDoc = (collectionName: CollectionName) => {
-    return firestore().collection(collectionName).add({
-        name: "apricot",
-        price: 4,
-        unit: "kg",
-        stock: 20,
-        image: "https://images.unsplash.com/photo-1567779833503-606dc39a14fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=60"
-    })
+export const createDoc = (
+    collectionName: CollectionName,
+    converter: firestore.FirestoreDataConverter<any>,
+    value: any
+) => {
+    return firestore()
+        .collection(collectionName)
+        .withConverter(converter)
+        .add(value);
 }
 
