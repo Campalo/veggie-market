@@ -1,5 +1,5 @@
 import React, { Children, FunctionComponent, cloneElement } from 'react';
-import { TextInput, Button } from "react-native";
+import { TextInput, Button, TextInputProps } from "react-native";
 import { useForm, Controller, UseFormMethods } from "react-hook-form";
 import { useButton } from './theme/button';
 import { useInput } from './theme/input';
@@ -36,14 +36,22 @@ export const Form: FunctionComponent<FormProps> = ({ defaultValues, children, on
 
 interface InputProps {
   name: string;
+  placeholder: TextInputProps['placeholder']
+  type?: TextInputProps['keyboardType']
   control?: UseFormMethods['control'];
   errors?: UseFormMethods['errors'];
   defaultValue?: string;
 }
 
-export const Input: FunctionComponent<InputProps> = ({ name, errors, control, defaultValue }) => {
+export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, control, defaultValue }) => {
   const { textInput } = useInput();
-  const textInputProps = (params: any) => ({ ...params, onChangeText: params.onChange, style: textInput });
+  const textInputProps = (params: any): TextInputProps => ({
+    ...params,
+    onChangeText: params.onChange,
+    style: textInput,
+    textContentType: type,
+    placeholder
+  });
   return (
     <>
       <Controller

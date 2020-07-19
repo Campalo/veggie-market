@@ -20,7 +20,7 @@ export const dark: Theme = {
     background: '#1D313F',
     text: '#FFFFFF',
     card: '#234051',
-    border: 'transparent',
+    border: '#050505',
     notification: '#234051' // Same as card for now
   }
 };
@@ -33,7 +33,7 @@ export const light: Theme = {
     background: '#EEEFF4',
     text: '#2D2D2D',
     card: '#FBFBFB',
-    border: 'transparent',
+    border: '#E5E5E5',
     notification: '#FBFBFB' // Same as card for now
   }
 };

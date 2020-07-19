@@ -29,7 +29,7 @@ export const useCollection = (collectionName: CollectionName) => {
 }
 
 const dataCollection = (snapshot: firestore.QuerySnapshot) => {
-    return snapshot.docs.map( doc => ({...doc.data(), id: doc.id}));
+    return snapshot.docs.map(doc => ({...doc.data(), id: doc.id}));
 }
 
 
