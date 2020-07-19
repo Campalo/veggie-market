@@ -5,7 +5,7 @@ import { Theme, density } from './theme';
 const input = (theme: Theme) => StyleSheet.create({
   textInput: {
     fontSize: 2 * density,
-    border: theme.colors.border,
+    borderColor: theme.colors.border,
     backgroundColor: theme.colors.card,
     color: theme.colors.text,
     margin: density,

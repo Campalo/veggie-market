@@ -36,19 +36,21 @@ export const Form: FunctionComponent<FormProps> = ({ defaultValues, children, on
 
 interface InputProps {
   name: string;
+  placeholder: TextInputProps['placeholder']
   type?: TextInputProps['keyboardType']
   control?: UseFormMethods['control'];
   errors?: UseFormMethods['errors'];
   defaultValue?: string;
 }
 
-export const Input: FunctionComponent<InputProps> = ({ name, type, control, defaultValue }) => {
+export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, control, defaultValue }) => {
   const { textInput } = useInput();
   const textInputProps = (params: any): TextInputProps => ({
     ...params,
     onChangeText: params.onChange,
     style: textInput,
-    textContentType: type
+    textContentType: type,
+    placeholder
   });
   return (
     <>
