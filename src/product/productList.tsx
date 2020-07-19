@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, Image, FlatList } from 'react-native';
+import React, {useRef} from 'react';
+import { Text, View, Image, Button, FlatList, Animated } from 'react-native';
 import { useCollection } from "../firestore";
 import { Link } from '@react-navigation/native';
 import { useList } from '../theme/list';
@@ -10,8 +10,25 @@ function ProductList() {
   const { list, listItem, itemTitle, itemSubtitle, itemAvatar } = useList();
   const { button } = useButton();
 
-  const renderProduct = ({ item }: any) => (
-    <View style={listItem}>
+  const initialValues = products.map(() => {
+    return new Animated.Value(0);
+  })
+
+  const animations = products.map((item, index) => {
+      return (
+        Animated.timing(initialValues[index], {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: true,
+        })
+      )
+  })
+
+  Animated.stagger(400, animations).start();
+
+
+  const renderProduct = ({ item , index}: any) => (
+    <Animated.View key={index} style={[listItem, {opacity: initialValues[index]}]}>
       <Image style={itemAvatar} source={{ uri: item.image }} />
       <View>
         <Text style={itemTitle}>{item.name}</Text>
@@ -21,17 +38,19 @@ function ProductList() {
           <Text style={itemSubtitle}>{item.stock} {item.unit} in stock</Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   )
 
   return(
     <View style={{flex: 1}}>
-        <FlatList style={list}
-            data={products}
-            renderItem={renderProduct}
-            keyExtractor={item => item.id}
-        >
-        </FlatList>
+        <View            >
+            <FlatList style={list}
+                data={products}
+                renderItem={renderProduct}
+                keyExtractor={item => item.id}
+                >
+            </FlatList>
+        </View>
         <Link style={button} to="/Create">Add</Link>
     </View>
   )
