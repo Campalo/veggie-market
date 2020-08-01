@@ -6,9 +6,9 @@ import { Button, SafeAreaView, StyleSheet } from 'react-native';
 import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
 import { useTypography } from './src/theme/typography';
 
-import ProductList from "./src/product/productList";
-import CreateScreen from './src/product/createProduct';
-import EditScreen from './src/product/editProduct';
+import ProductList from "./src/product/list";
+import CreateScreen from './src/product/create';
+import EditScreen from './src/product/edit';
 import { ColorSchemeName } from 'react-native-appearance';
 
 // TO CHECK: How to handle navigation with react-native/web because we don't use link with react-navigation/native
