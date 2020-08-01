@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,6 +9,7 @@ import { converter, FormProduct, formProduct } from './model';
 
 function CreateScreen() {
   const navigation = useNavigation();
+  
   const add = async (product: FormProduct) => {
     await createDoc("products", converter, product);
     navigation.goBack();
@@ -20,7 +21,7 @@ function CreateScreen() {
         <ImgPicker name="image"/>
         <Label>Product Name</Label>
         <Input name="name" placeholder="Name of the product" />
-        <Label>Price</Label>
+        <Label>Price (€ / unit)</Label>
         <Input name="price" type="numeric" placeholder="Price" />
         <Label>Stock</Label>
         <Input name="stock" type="numeric" placeholder="Amount in Stock" />

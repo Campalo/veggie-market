@@ -16,14 +16,15 @@ interface ControlData<T = any> {
 // FORM //
 //////////
 
-interface FormProps {
-  defaultValues?: any;
-  onSubmit: (value: any) => void
+interface FormProps<T = any> {
+  defaultValues?: T;
+  onSubmit: (value: T) => void
 }
 
 export const Form: FunctionComponent<FormProps> = ({ defaultValues, children, onSubmit }) => {
   const { control, handleSubmit, errors } = useForm({ defaultValues });
   const submit = handleSubmit(onSubmit);
+
   const controls = Children.map(children, (child: any, key: number) => {
     if (![Input, Select, ImgPicker, Submit, Label].includes(child.type)) {
       throw new Error('Form does not support type ' + child.type.name);
@@ -71,15 +72,7 @@ export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, 
     name={name}
     control={control}
     defaultValue={defaultValue}
-    render={({ onChange, onBlur, value }) => <TextInput
-        style={textInput}
-        value={value}
-        onBlur={onBlur}
-        onChangeText={(v) => onChange(v)}
-        keyboardType={type}
-        placeholder={placeholder}
-      />
-    }
+    render={input}
   />
 }
 
