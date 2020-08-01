@@ -5,18 +5,17 @@ import { useNavigation } from '@react-navigation/native';
 
 import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
 import { createDoc } from '../firestore';
-import { converter, FormProduct } from './model';
+import { converter, FormProduct, formProduct } from './model';
 
 function CreateScreen() {
   const navigation = useNavigation();
   const add = async (product: FormProduct) => {
-    console.log('product', product);
     await createDoc("products", converter, product);
     navigation.goBack();
   }
   return (
     <View>
-      <Form onSubmit={add}>
+      <Form defaultValues={formProduct()} onSubmit={add}>
         <Label>Select an image</Label>
         <ImgPicker name="image"/>
         <Label>Product Name</Label>

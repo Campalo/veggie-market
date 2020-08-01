@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Button, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
-import { converter, FormProduct } from './model';
+import { converter, FormProduct, formProduct } from './model';
 import { firestore } from 'firebase';
 
 
@@ -33,7 +33,7 @@ function EditScreen() {
 
   return (
     <View>
-      <Form defaultValues={product} onSubmit={edit}>
+      <Form defaultValues={formProduct(product)} onSubmit={edit}>
         <Label>Select an image</Label>
         <ImgPicker name="image"/>
         <Label>Product Name</Label>

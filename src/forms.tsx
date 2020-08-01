@@ -61,7 +61,7 @@ export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, 
       style={textInput}
       value={value}
       onBlur={onBlur}
-      onChangeText={onChange}
+      onChangeText={(v) => onChange(v)}
       keyboardType={type}
       placeholder={placeholder}
     />
@@ -71,7 +71,15 @@ export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, 
     name={name}
     control={control}
     defaultValue={defaultValue}
-    render={input}
+    render={({ onChange, onBlur, value }) => <TextInput
+        style={textInput}
+        value={value}
+        onBlur={onBlur}
+        onChangeText={(v) => onChange(v)}
+        keyboardType={type}
+        placeholder={placeholder}
+      />
+    }
   />
 }
 

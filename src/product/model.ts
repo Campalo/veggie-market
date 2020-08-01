@@ -1,7 +1,7 @@
 export interface FormProduct {
   image: string;
   name: string;
-  unit: string;
+  unit: 'kg' | 'unite';
   price: string;
   stock: string;
 }
@@ -9,9 +9,20 @@ export interface FormProduct {
 export interface Product {
   image: string;
   name: string;
-  unit: string;
+  unit: 'kg' | 'unite';
   price: number;
   stock: number;
+}
+
+export function formProduct(params: Partial<FormProduct> = {}): FormProduct {
+  return {
+    image: '',
+    name: '',
+    unit: 'kg',
+    price: '',
+    stock: '',
+    ...params
+  }
 }
 
 function toFirestore(product: FormProduct): Product {
