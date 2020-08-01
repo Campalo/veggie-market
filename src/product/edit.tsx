@@ -6,7 +6,6 @@ import { converter, FormProduct } from './model';
 import { firestore } from 'firebase';
 
 
-
 function EditScreen() {
   const navigation = useNavigation();
   const { id } = useRoute().params as { id: string };
@@ -35,11 +34,15 @@ function EditScreen() {
   return (
     <View>
       <Form defaultValues={product} onSubmit={edit}>
+      <Text>Product Name</Text>
         <Input name="name" placeholder="Name of the product" />
+        <Text>Price</Text>
         <Input name="price" type="decimal-pad" placeholder="Price" />
+        <Text>Stock</Text>
         <Input name="stock" type="decimal-pad" placeholder="Amount in Stock" />
+        <Text>Unit</Text>
         <Select name="unit" options={['kg', 'unite']} />
-        <Submit>Save Product</Submit>
+        <Submit>Update Product</Submit>
       </Form>
       <Button title="Delete" onPress={remove} />
     </View>
