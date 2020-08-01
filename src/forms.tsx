@@ -1,10 +1,12 @@
 import React, { Children, FunctionComponent, cloneElement, ReactText } from 'react';
-import { TextInput, Button, TextInputProps, Text, View, Image } from "react-native";
+import { TextInput, TouchableOpacity, TextInputProps, Text, View, Image, Button } from "react-native";
 import { useForm, Controller, UseFormMethods } from "react-hook-form";
 import { Picker } from '@react-native-community/picker';
 import { useInput } from './theme/input';
 import { useTypography } from './theme/typography';
 import * as ImagePicker from 'expo-image-picker';
+import { useButton } from './theme/button';
+import { Btn } from './components/btn';
 
 interface ControlData<T = any> {
   onChange: (data: T) => void;
@@ -116,10 +118,7 @@ export const Select: FunctionComponent<SelectProps> = ({ name, options, control,
 // SUBMIT //
 ////////////
 
-export const Submit: FunctionComponent<any> = ({ children, submit, ariaLabel }) => {
-  const title = typeof children === 'string' ? children : 'Submit';
-  return <Button title={title} onPress={submit} accessibilityLabel={ariaLabel} />
-}
+export const Submit: FunctionComponent<any> = ({ children, submit }) => <Btn onPress={submit}>{children}</Btn>;
 
 ///////////
 // LABEL //
@@ -174,7 +173,7 @@ export const ImgPicker: FunctionComponent<ImgPickerProps> = ({ name, control, de
   const imgPicker = ({ onChange, value }: ControlData<string>) => (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Image source={{ uri: value }} style={{ width: 200, height: 200 }} />
-      <Button title="Pick an image" onPress={() => pickImg(onChange)} />
+      <Btn onPress={() => pickImg(onChange)}>Pick an image</Btn>
     </View>
   );
 

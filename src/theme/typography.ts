@@ -32,6 +32,7 @@ export const typography = (theme: Theme) => StyleSheet.create({
   },
   primary: {
     backgroundColor: theme.colors.primary,
+    color: theme.colors.primaryContrast
   }
 });
 

@@ -8,7 +8,12 @@ export const radius = density * 0.5;
 export interface Theme {
   dark: boolean;
   colors: NavigationTheme['colors'] & {
+    /** Contrast color to apply on a primary background */
+    primaryContrast: string;
+    /** Secondary color */
     secondary: string;
+    /** Contrast color to apply on a secondary background */
+    secondaryContrast: string;
   }
 }
 
@@ -16,7 +21,9 @@ export const dark: Theme = {
   dark: true,
   colors: {
     primary: '#59BD48',
+    primaryContrast: '#FFFFFF',
     secondary: '#7B2968',
+    secondaryContrast: '#FFFFFF',
     background: '#1D313F',
     text: '#FFFFFF',
     card: '#234051',
@@ -29,7 +36,9 @@ export const light: Theme = {
   dark: false,
   colors: {
     primary: '#45F1A7',
+    primaryContrast: '#FFFFFF',
     secondary: '#7B2968',
+    secondaryContrast: '#FFFFFF',
     background: '#EEEFF4',
     text: '#2D2D2D',
     card: '#FBFBFB',

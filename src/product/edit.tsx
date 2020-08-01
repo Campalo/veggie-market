@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Button, Text } from 'react-native';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { View, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
 import { converter, FormProduct, formProduct } from './model';
 import { firestore } from 'firebase';
+import { Btn } from '../components/btn';
 
 
 function EditScreen() {
@@ -17,6 +18,10 @@ function EditScreen() {
       .then(snapshot => snapshot.data())
       .then(data => setProduct(data));
   }, [id]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerRight: () => <Btn onPress={remove}>Delete</Btn> });
+  }, [navigation]);
 
   const edit = async (product: any) => {
     await doc.update(product);
@@ -46,7 +51,6 @@ function EditScreen() {
         <Select name="unit" options={['kg', 'unite']} />
         <Submit>Update Product</Submit>
       </Form>
-      <Button title="Delete" onPress={remove} />
     </View>
   )
 }
