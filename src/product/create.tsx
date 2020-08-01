@@ -1,27 +1,31 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Form, Input, Submit, Select } from '../forms';
+
+import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
 import { createDoc } from '../firestore';
-import { converter } from './model';
+import { converter, FormProduct } from './model';
 
 function CreateScreen() {
   const navigation = useNavigation();
-  const add = async (product: any) => {
+  const add = async (product: FormProduct) => {
+    console.log('product', product);
     await createDoc("products", converter, product);
     navigation.goBack();
   }
   return (
     <View>
       <Form onSubmit={add}>
-        <Text>Product Name</Text>
+        <Label>Select an image</Label>
+        <ImgPicker name="image"/>
+        <Label>Product Name</Label>
         <Input name="name" placeholder="Name of the product" />
-        <Text>Price</Text>
-        <Input name="price" type="decimal-pad" placeholder="Price" />
-        <Text>Stock</Text>
-        <Input name="stock" type="decimal-pad" placeholder="Amount in Stock" />
-        <Text>Unit</Text>
+        <Label>Price</Label>
+        <Input name="price" type="numeric" placeholder="Price" />
+        <Label>Stock</Label>
+        <Input name="stock" type="numeric" placeholder="Amount in Stock" />
+        <Label>Unit</Label>
         <Select name="unit" options={['kg', 'unite']} />
         <Submit>Save Product</Submit>
       </Form>

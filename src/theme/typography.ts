@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { useTheme } from '@react-navigation/native';
-import { Theme } from './theme';
+import { Theme, density } from './theme';
 
 export const typography = (theme: Theme) => StyleSheet.create({
   app: {
@@ -23,6 +23,12 @@ export const typography = (theme: Theme) => StyleSheet.create({
     fontWeight: 'normal',
     fontSize: 16,
     color: theme.colors.text
+  },
+  label: {
+    fontWeight: 'normal',
+    fontSize: 16,
+    color: theme.colors.text,
+    margin: density,
   },
   primary: {
     backgroundColor: theme.colors.primary,
