@@ -1,11 +1,10 @@
 import React, { Children, FunctionComponent, cloneElement, ReactText } from 'react';
-import { TextInput, TouchableOpacity, TextInputProps, Text, View, Image, Button } from "react-native";
+import { TextInput, TextInputProps, Text, View, Image } from "react-native";
 import { useForm, Controller, UseFormMethods } from "react-hook-form";
 import { Picker } from '@react-native-community/picker';
 import { useInput } from './theme/input';
 import { useTypography } from './theme/typography';
 import * as ImagePicker from 'expo-image-picker';
-import { useButton } from './theme/button';
 import { Btn } from './components/btn';
 
 interface ControlData<T = any> {
