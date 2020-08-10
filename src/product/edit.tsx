@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
-import { converter, FormProduct, formProduct } from './model';
+import { converter, FormProduct } from './model';
 import { firestore } from 'firebase';
 import { Btn } from '../components/btn';
+import ProductFormFields from '../components/productForm';
 
 
 function EditScreen() {
@@ -38,18 +38,7 @@ function EditScreen() {
 
   return (
     <View>
-      <Form defaultValues={formProduct(product)} onSubmit={edit}>
-        <ImgPicker name="image"/>
-        <Label>Product Name</Label>
-        <Input name="name" placeholder="Name of the product" />
-        <Label>Price</Label>
-        <Input name="price" type="numeric" placeholder="Price" />
-        <Label>Stock</Label>
-        <Input name="stock" type="numeric" placeholder="Amount in Stock" />
-        <Label>Unit</Label>
-        <Select name="unit" options={['kg', 'unite']} />
-        <Submit>Update Product</Submit>
-      </Form>
+      <ProductFormFields action={edit} submitLabel="Update Product" product={product}/>
     </View>
   )
 }

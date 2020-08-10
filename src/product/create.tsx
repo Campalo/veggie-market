@@ -1,33 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-
-import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
 import { createDoc } from '../firestore';
-import { converter, FormProduct, formProduct } from './model';
+import { converter, FormProduct } from './model';
+import ProductFormFields from '../components/productForm';
 
 function CreateScreen() {
   const navigation = useNavigation();
-  
+
   const add = async (product: FormProduct) => {
     await createDoc("products", converter, product);
     navigation.goBack();
   }
+
   return (
     <View>
-      <Form defaultValues={formProduct()} onSubmit={add}>
-        <ImgPicker name="image"/>
-        <Label>Product Name</Label>
-        <Input name="name" placeholder="Name of the product" />
-        <Label>Price (€ / unit)</Label>
-        <Input name="price" type="numeric" placeholder="Price" />
-        <Label>Stock</Label>
-        <Input name="stock" type="numeric" placeholder="Amount in Stock" />
-        <Label>Unit</Label>
-        <Select name="unit" options={['kg', 'unite']} />
-        <Submit>Save Product</Submit>
-      </Form>
+        <ProductFormFields action={add} submitLabel="Save product"/>
     </View>
   )
 }
