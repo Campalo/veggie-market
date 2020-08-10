@@ -7,6 +7,7 @@ import { useTypography } from './theme/typography';
 import * as ImagePicker from 'expo-image-picker';
 import { Btn } from './components/btn';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useImgPicker } from './theme/imgPicker';
 
 interface ControlData<T = any> {
   onChange: (data: T) => void;
@@ -170,12 +171,15 @@ export const ImgPicker: FunctionComponent<ImgPickerProps> = ({ name, control, de
   }
 
   /** The image picker component */
-  const imgPicker = ({ onChange, value }: ControlData<string>) => (
+  const imgPicker = ({ onChange, value }: ControlData<string>) => {
+    const { productAvatar } = useImgPicker();
+    return (
     <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      <Image source={{ uri: value }} style={{ width: 150, height: 150, marginBottom: 10, marginTop: 10, borderRadius: 100 }} />
+      <Image source={{ uri: value }} style={ productAvatar } />
       <Btn onPress={() => pickImg(onChange)}>Pick an image</Btn>
     </View>
-  );
+    )
+  };
 
   /** Controller wrapper around the image picker to use it inside a form */
   return <Controller
