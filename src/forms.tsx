@@ -171,8 +171,8 @@ export const ImgPicker: FunctionComponent<ImgPickerProps> = ({ name, control, de
 
   /** The image picker component */
   const imgPicker = ({ onChange, value }: ControlData<string>) => (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Image source={{ uri: value }} style={{ width: 200, height: 200 }} />
+    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+      <Image source={{ uri: value }} style={{ width: 200, height: 200, marginBottom: 10, borderRadius: 100 }} />
       <Btn onPress={() => pickImg(onChange)}>Pick an image</Btn>
     </View>
   );
