@@ -6,6 +6,7 @@ import { useInput } from './theme/input';
 import { useTypography } from './theme/typography';
 import * as ImagePicker from 'expo-image-picker';
 import { Btn } from './components/btn';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface ControlData<T = any> {
   onChange: (data: T) => void;
@@ -40,7 +41,7 @@ export const Form: FunctionComponent<FormProps> = ({ defaultValues, children, on
       case Label: return child;
     }
   });
-  return <>{controls}</>;
+  return <ScrollView>{controls}</ScrollView>;
 };
 
 ///////////
@@ -171,7 +172,7 @@ export const ImgPicker: FunctionComponent<ImgPickerProps> = ({ name, control, de
   /** The image picker component */
   const imgPicker = ({ onChange, value }: ControlData<string>) => (
     <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      <Image source={{ uri: value }} style={{ width: 200, height: 200, marginBottom: 10, borderRadius: 100 }} />
+      <Image source={{ uri: value }} style={{ width: 150, height: 150, marginBottom: 10, marginTop: 10, borderRadius: 100 }} />
       <Btn onPress={() => pickImg(onChange)}>Pick an image</Btn>
     </View>
   );

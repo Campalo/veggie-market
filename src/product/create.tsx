@@ -17,7 +17,6 @@ function CreateScreen() {
   return (
     <View>
       <Form defaultValues={formProduct()} onSubmit={add}>
-        <Label>Select an image</Label>
         <ImgPicker name="image"/>
         <Label>Product Name</Label>
         <Input name="name" placeholder="Name of the product" />

@@ -12,8 +12,8 @@ function EditScreen() {
   const { id } = useRoute().params as { id: string };
   const [product, setProduct] = useState<FormProduct>();
   const doc = firestore().doc(`products/${id}`).withConverter(converter);
-  
-  useEffect(() => {  
+
+  useEffect(() => {
     firestore().doc(`products/${id}`).withConverter(converter).get()
       .then(snapshot => snapshot.data())
       .then(data => setProduct(data));
@@ -39,7 +39,6 @@ function EditScreen() {
   return (
     <View>
       <Form defaultValues={formProduct(product)} onSubmit={edit}>
-        <Label>Select an image</Label>
         <ImgPicker name="image"/>
         <Label>Product Name</Label>
         <Input name="name" placeholder="Name of the product" />
