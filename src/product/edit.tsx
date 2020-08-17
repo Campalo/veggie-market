@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Button, Text } from 'react-native';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
+import { View, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Form, Input, Submit, Select } from '../forms';
 import { converter, FormProduct } from './model';
 import { firestore } from 'firebase';
-
+import { Btn } from '../components/btn';
+import ProductFormFields from '../components/productForm';
 
 
 function EditScreen() {
@@ -12,12 +12,16 @@ function EditScreen() {
   const { id } = useRoute().params as { id: string };
   const [product, setProduct] = useState<FormProduct>();
   const doc = firestore().doc(`products/${id}`).withConverter(converter);
-  
-  useEffect(() => {  
+
+  useEffect(() => {
     firestore().doc(`products/${id}`).withConverter(converter).get()
       .then(snapshot => snapshot.data())
       .then(data => setProduct(data));
   }, [id]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerRight: () => <Btn onPress={remove}>Delete</Btn> });
+  }, [navigation]);
 
   const edit = async (product: any) => {
     await doc.update(product);
@@ -34,14 +38,7 @@ function EditScreen() {
 
   return (
     <View>
-      <Form defaultValues={product} onSubmit={edit}>
-        <Input name="name" placeholder="Name of the product" />
-        <Input name="price" type="decimal-pad" placeholder="Price" />
-        <Input name="stock" type="decimal-pad" placeholder="Amount in Stock" />
-        <Select name="unit" options={['kg', 'unite']} />
-        <Submit>Save Product</Submit>
-      </Form>
-      <Button title="Delete" onPress={remove} />
+      <ProductFormFields action={edit} submitLabel="Update Product" product={product}/>
     </View>
   )
 }

@@ -1,15 +1,16 @@
 import 'react-native-gesture-handler';
-import React, { useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useState, useLayoutEffect } from 'react';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
-import { Button, SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
 import { useTypography } from './src/theme/typography';
 
-import ProductList from "./src/product/productList";
-import CreateScreen from './src/product/createProduct';
-import EditScreen from './src/product/editProduct';
+import ProductList from "./src/product/list";
+import CreateScreen from './src/product/create';
+import EditScreen from './src/product/edit';
 import { ColorSchemeName } from 'react-native-appearance';
+import { Btn } from './src/components/btn';
 
 // TO CHECK: How to handle navigation with react-native/web because we don't use link with react-navigation/native
 
@@ -32,13 +33,17 @@ export default function App() {
 }
 
 function HomeScreen() {
+  const navigation = useNavigation();
   const { app } = useTypography();
   const toggleMode = useToggleMode();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerRight: () => <Btn onPress={toggleMode}>Change Theme</Btn> });
+  }, [navigation]);
 
   return (
     <SafeAreaView style={app}>
       <ProductList />
-      <Button title="Change Theme" onPress={toggleMode} />
     </SafeAreaView>
   );
 }

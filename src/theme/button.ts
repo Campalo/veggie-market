@@ -9,7 +9,7 @@ const button = (theme: Theme) => StyleSheet.create({
     paddingLeft: 2 * density,
     paddingRight: 2 * density,
     backgroundColor: theme.colors.primary,
-    color: theme.colors.text,
+    color: theme.colors.primaryContrast,
     borderRadius: radius,
     alignItems: 'center',
     justifyContent: 'center',
