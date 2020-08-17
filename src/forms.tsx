@@ -56,9 +56,10 @@ interface InputProps {
   control?: UseFormMethods['control'];
   errors?: UseFormMethods['errors'];
   defaultValue?: string;
+  secureTextEntry?: boolean;
 }
 
-export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, control, defaultValue }) => {
+export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, control, defaultValue, secureTextEntry }) => {
   const { textInput } = useInput();
   const input = ({ onChange, onBlur, value }: ControlData<string>) => (
     <TextInput
@@ -68,6 +69,7 @@ export const Input: FunctionComponent<InputProps> = ({ name, placeholder, type, 
       onChangeText={(v) => onChange(v)}
       keyboardType={type}
       placeholder={placeholder}
+      secureTextEntry={secureTextEntry}
     />
   );
 

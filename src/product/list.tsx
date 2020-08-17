@@ -5,6 +5,7 @@ import { Link, useNavigation } from '@react-navigation/native';
 import { useList } from '../theme/list';
 import { useButton } from '../theme/button';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Signup from "../auth/signup";
 
 function ProductList() {
   const navigation = useNavigation();
@@ -56,6 +57,7 @@ function ProductList() {
 
   return (
     <View style={{ flex: 1 }}>
+      <Signup />
       <FlatList style={list}
         data={products}
         renderItem={renderProduct}
