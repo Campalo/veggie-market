@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
-import { FormProduct } from '../product/model';
+import { Form, Input, Submit, Select, Label, ImgPicker } from '../../../common/components/forms';
+import { FormProduct } from '../../../common/types/product.model';
 
 const ProductFormFields = (
     { onSubmit, submitLabel, product } :

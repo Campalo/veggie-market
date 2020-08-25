@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { converter, FormProduct } from './model';
+import { converter, FormProduct } from '../../../common/types/product.model';
 import { firestore } from 'firebase';
-import { Btn } from '../components/btn';
-import ProductFormFields from '../components/productForm';
+import { Btn } from '../../../common/components/btn';
+import ProductFormFields from './form';
 
 
 function EditScreen() {

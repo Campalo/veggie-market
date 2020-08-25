@@ -3,14 +3,14 @@ import React, { useState, useLayoutEffect } from 'react';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaView } from 'react-native';
-import { getTheme, ThemeContext, useToggleMode } from './src/theme/theme';
-import { useTypography } from './src/theme/typography';
+import { getTheme, ThemeContext, useToggleMode } from './src/common/theme/theme';
+import { useTypography } from './src/common/theme/typography';
 
-import ProductList from "./src/product/list";
-import CreateScreen from './src/product/create';
-import EditScreen from './src/product/edit';
+import ProductList from "./src/pages/seller/product/list";
+import CreateScreen from './src/pages/seller/product/create';
+import EditScreen from './src/pages/seller/product/edit';
 import { ColorSchemeName } from 'react-native-appearance';
-import { Btn } from './src/components/btn';
+import { Btn } from './src/common/components/btn';
 
 const Stack = createStackNavigator();
 

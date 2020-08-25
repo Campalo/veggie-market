@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { View, Image, Text } from "react-native";
-import { Form, Label, Input, Submit } from "../forms";
+import { Form, Label, Input, Submit } from "../../common/components/forms";
 import { auth, User } from "firebase";
-import { Btn } from "../components/btn";
+import { Btn } from "../../common/components/btn";
 
 interface Credential {
   email: string,

@@ -2,12 +2,12 @@ import React, { Children, FunctionComponent, cloneElement, ReactText } from 'rea
 import { TextInput, TextInputProps, Text, View, Image } from "react-native";
 import { useForm, Controller, UseFormMethods } from "react-hook-form";
 import { Picker } from '@react-native-community/picker';
-import { useInput } from './theme/input';
-import { useTypography } from './theme/typography';
+import { useInput } from '../theme/input';
+import { useTypography } from '../theme/typography';
 import * as ImagePicker from 'expo-image-picker';
-import { Btn } from './components/btn';
+import { Btn } from './btn';
 import { ScrollView } from 'react-native-gesture-handler';
-import { useImgPicker } from './theme/imgPicker';
+import { useImgPicker } from '../theme/imgPicker';
 
 interface ControlData<T = any> {
   onChange: (data: T) => void;

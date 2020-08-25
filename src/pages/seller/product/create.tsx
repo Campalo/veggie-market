@@ -2,9 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { createDoc } from '../firestore';
-import { converter, FormProduct } from './model';
-import ProductFormFields from '../components/productForm';
+import { createDoc } from '../../../firestore';
+import { converter, FormProduct } from '../../../common/types/product.model';
+import ProductFormFields from './form';
 
 function CreateScreen() {
   const navigation = useNavigation();

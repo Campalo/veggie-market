@@ -1,13 +1,13 @@
 import React, { useLayoutEffect } from 'react';
 import { Text, View, Image, FlatList, Animated, Easing } from 'react-native';
-import { useCollection } from "../firestore";
+import { useCollection } from "../../../firestore";
 import { Link, useNavigation } from '@react-navigation/native';
-import { useList } from '../theme/list';
-import { useButton } from '../theme/button';
+import { useList } from '../../../common/theme/list';
+import { useButton } from '../../../common/theme/button';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Signup from "../auth/signup";
-import { useToggleMode } from '../theme/theme';
-import { Btn } from '../components/btn';
+import Signup from "../../auth/signup";
+import { useToggleMode } from '../../../common/theme/theme';
+import { Btn } from '../../../common/components/btn';
 
 function ProductList() {
   const navigation = useNavigation();
