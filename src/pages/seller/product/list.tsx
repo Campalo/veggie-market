@@ -5,7 +5,6 @@ import { Link, useNavigation } from '@react-navigation/native';
 import { useList } from '../../../common/theme/list';
 import { useButton } from '../../../common/theme/button';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useToggleMode } from '../../../common/theme/theme';
 import { Btn } from '../../../common/components/btn';
 
 function ProductList() {
@@ -13,14 +12,12 @@ function ProductList() {
   const products = useCollection("products");
   const { list, listItem, itemTitle, itemSubtitle, itemAvatar } = useList();
   const { button } = useButton();
-  const toggleMode = useToggleMode();
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerRight: () => {
       return (
-        <View style={{display: "flex"}}>
+        <View>
           <Btn onPress={() => navigation.navigate('Auth')}>Login / Logout</Btn>
-          <Btn onPress={toggleMode}>Change Theme</Btn>
         </View>
       )
     }});

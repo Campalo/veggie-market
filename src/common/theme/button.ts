@@ -18,6 +18,9 @@ const button = (theme: Theme) => StyleSheet.create({
   buttonIcon: {
 
   },
+  buttonWrapper: {
+    marginVertical: 2 * density
+  }
 });
 
 export function useButton() {

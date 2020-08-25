@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
-import { View, Image, Text } from "react-native";
+import {  View, Image, Text } from "react-native";
 import { Form, Label, Input, Submit } from "../../common/components/forms";
 import { auth, User } from "firebase";
 import { Btn } from "../../common/components/btn";
+import {useButton} from '../../common/theme/button';
 import { useTypography } from "../../common/theme/typography";
 import { density } from "../../common/theme/theme";
+import { useNavigation } from '@react-navigation/native';
+
 
 interface Credential {
   email: string,
@@ -12,6 +15,8 @@ interface Credential {
 }
 
 const SignupScreen = () => {
+  const navigation = useNavigation();
+  const {buttonWrapper } = useButton();
   const { text, subtitle } = useTypography();
   const [user, setUser] = useState<User | null>(null);
 
@@ -42,7 +47,8 @@ const SignupScreen = () => {
       <Text style={[subtitle, {justifyContent: "center", paddingBottom: 2 * density}]}>
       You're connected now
       </Text>
-      <Btn onPress={signout}>Logout</Btn>
+        <Btn style={buttonWrapper} onPress={()=> navigation.navigate("Profile")}>Go to Profile and Settings</Btn>
+        <Btn onPress={signout}>Logout</Btn>
     </View>
   )
 
@@ -53,10 +59,10 @@ const SignupScreen = () => {
         <Input name="email" placeholder="Your email" />
         <Label>Password</Label>
         <Input name="password" placeholder="Your password" secureTextEntry={true}/>
-        <Submit >Signup</Submit>
+        <Submit>Signup</Submit>
       </Form>
-      <Text style={[text, {paddingVertical: 2 * density, textAlign: "center"}]}>Or</Text>
-      <Btn onPress={signinWithGoogle}>Login with Google</Btn>
+      <Text style={[text, {paddingTop: 2 * density, textAlign: "center"}]}>Or</Text>
+      <Btn style={buttonWrapper} onPress={signinWithGoogle}>Login with Google</Btn>
     </View>
   )
 

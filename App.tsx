@@ -9,6 +9,7 @@ import ProductList from "./src/pages/seller/product/list";
 import CreateScreen from './src/pages/seller/product/create';
 import EditScreen from './src/pages/seller/product/edit';
 import SignupScreen from './src/pages/auth/signup';
+import ProfileScreen from  './src/pages/seller/profile/profile';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
             <Stack.Screen name="Create" component={CreateScreen} options={{ title: 'Create your product' }} />
             <Stack.Screen name="Edit" component={EditScreen} options={{ title: 'Edit your product' }} />
             <Stack.Screen name="Auth" component={SignupScreen} options={{title: 'Signup / Login with Google / Logout'}} />
+            <Stack.Screen name="Profile" component={ProfileScreen} options={{title: 'Profile'}} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeContext.Provider>
