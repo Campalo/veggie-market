@@ -1,19 +1,17 @@
 import React from 'react';
 import { Form, Input, Submit, Select, Label, ImgPicker } from '../forms';
-import { FormProduct, formProduct } from '../product/model';
+import { FormProduct } from '../product/model';
 
 const ProductFormFields = (
-    { action, submitLabel, product } :
+    { onSubmit, submitLabel, product } :
     {
-        action: (product: FormProduct) => Promise<void>;
+        onSubmit: (product: FormProduct) => Promise<void>;
         submitLabel: string;
         product?: any;
     }) => {
 
-    const currentProduct= product ? product : null;
-
     return (
-        <Form defaultValues={formProduct(currentProduct)} onSubmit={action}>
+        <Form defaultValues={product || null} onSubmit={onSubmit}>
             <ImgPicker name="image"/>
             <Label>Product Name</Label>
             <Input name="name" placeholder="Name of the product" />

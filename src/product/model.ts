@@ -14,17 +14,6 @@ export interface Product {
   stock: number;
 }
 
-export function formProduct(params: Partial<FormProduct> = {}): FormProduct {
-  return {
-    image: '',
-    name: '',
-    unit: 'kg',
-    price: '',
-    stock: '',
-    ...params
-  }
-}
-
 function toFirestore(product: FormProduct): Product {
   return {
     // Hardcode image because firestore doesn't support base64 images. Use Cloud storage instead

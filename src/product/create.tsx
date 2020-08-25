@@ -16,7 +16,7 @@ function CreateScreen() {
 
   return (
     <View>
-        <ProductFormFields action={add} submitLabel="Save product"/>
+        <ProductFormFields onSubmit={add} submitLabel="Save product"/>
     </View>
   )
 }

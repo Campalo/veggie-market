@@ -12,8 +12,6 @@ import EditScreen from './src/product/edit';
 import { ColorSchemeName } from 'react-native-appearance';
 import { Btn } from './src/components/btn';
 
-// TO CHECK: How to handle navigation with react-native/web because we don't use link with react-navigation/native
-
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -23,27 +21,11 @@ export default function App() {
       <ThemeContext.Provider value={[mode, setMode]}>
         <NavigationContainer theme={getTheme(mode)}>
           <Stack.Navigator>
-            <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Dashboard' }} />
+            <Stack.Screen name="Home" component={ProductList} options={{ title: 'Dashboard' }} />
             <Stack.Screen name="Create" component={CreateScreen} options={{ title: 'Create your product' }} />
             <Stack.Screen name="Edit" component={EditScreen} options={{ title: 'Edit your product' }} />
           </Stack.Navigator>
         </NavigationContainer>
       </ThemeContext.Provider>
-  );
-}
-
-function HomeScreen() {
-  const navigation = useNavigation();
-  const { app } = useTypography();
-  const toggleMode = useToggleMode();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({ headerRight: () => <Btn onPress={toggleMode}>Change Theme</Btn> });
-  }, [navigation]);
-
-  return (
-    <SafeAreaView style={app}>
-      <ProductList />
-    </SafeAreaView>
   );
 }

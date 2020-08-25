@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Text, View, Image, FlatList, Animated, Easing } from 'react-native';
 import { useCollection } from "../firestore";
 import { Link, useNavigation } from '@react-navigation/native';
@@ -6,12 +6,19 @@ import { useList } from '../theme/list';
 import { useButton } from '../theme/button';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Signup from "../auth/signup";
+import { useToggleMode } from '../theme/theme';
+import { Btn } from '../components/btn';
 
 function ProductList() {
   const navigation = useNavigation();
   const products = useCollection("products");
   const { list, listItem, itemTitle, itemSubtitle, itemAvatar } = useList();
   const { button } = useButton();
+  const toggleMode = useToggleMode();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerRight: () => <Btn onPress={toggleMode}>Change Theme</Btn> });
+  }, [navigation]);
 
   const initialValues = products.map(() => {
     return new Animated.Value(0);

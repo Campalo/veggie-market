@@ -38,7 +38,7 @@ function EditScreen() {
 
   return (
     <View>
-      <ProductFormFields action={edit} submitLabel="Update Product" product={product}/>
+      <ProductFormFields onSubmit={edit} submitLabel="Update Product" product={product}/>
     </View>
   )
 }
