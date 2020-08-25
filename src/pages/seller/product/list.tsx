@@ -5,7 +5,6 @@ import { Link, useNavigation } from '@react-navigation/native';
 import { useList } from '../../../common/theme/list';
 import { useButton } from '../../../common/theme/button';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Signup from "../../auth/signup";
 import { useToggleMode } from '../../../common/theme/theme';
 import { Btn } from '../../../common/components/btn';
 
@@ -17,7 +16,15 @@ function ProductList() {
   const toggleMode = useToggleMode();
 
   useLayoutEffect(() => {
-    navigation.setOptions({ headerRight: () => <Btn onPress={toggleMode}>Change Theme</Btn> });
+    navigation.setOptions({ headerRight: () => {
+      return (
+        <View style={{display: "flex"}}>
+          <Btn onPress={() => navigation.navigate('Auth')}>Login / Logout</Btn>
+          <Btn onPress={toggleMode}>Change Theme</Btn>
+        </View>
+      )
+    }});
+
   }, [navigation]);
 
   const initialValues = products.map(() => {
@@ -64,7 +71,6 @@ function ProductList() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Signup />
       <FlatList style={list}
         data={products}
         renderItem={renderProduct}
