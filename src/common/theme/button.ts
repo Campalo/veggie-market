@@ -18,7 +18,7 @@ const button = (theme: Theme) => StyleSheet.create({
   buttonIcon: {
 
   },
-  buttonWrapper: {
+  buttonWithMarginTop: {
     marginVertical: 2 * density
   }
 });

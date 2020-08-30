@@ -6,7 +6,7 @@ import { Btn } from "../../common/components/btn";
 import {useButton} from '../../common/theme/button';
 import { useTypography } from "../../common/theme/typography";
 import { density } from "../../common/theme/theme";
-import { useNavigation } from '@react-navigation/native';
+import { Link, useNavigation } from '@react-navigation/native';
 
 
 interface Credential {
@@ -16,7 +16,7 @@ interface Credential {
 
 const SignupScreen = () => {
   const navigation = useNavigation();
-  const {buttonWrapper } = useButton();
+  const {buttonWithMarginTop } = useButton();
   const { text, subtitle } = useTypography();
   const [user, setUser] = useState<User | null>(null);
 
@@ -47,7 +47,7 @@ const SignupScreen = () => {
       <Text style={[subtitle, {justifyContent: "center", paddingBottom: 2 * density}]}>
       You're connected now
       </Text>
-        <Btn style={buttonWrapper} onPress={()=> navigation.navigate("Profile")}>Go to Profile and Settings</Btn>
+        <Link style={buttonWithMarginTop} to="/Profile">Go to Profile and Settings</Link>
         <Btn onPress={signout}>Logout</Btn>
     </View>
   )
@@ -62,7 +62,7 @@ const SignupScreen = () => {
         <Submit>Signup</Submit>
       </Form>
       <Text style={[text, {paddingTop: 2 * density, textAlign: "center"}]}>Or</Text>
-      <Btn style={buttonWrapper} onPress={signinWithGoogle}>Login with Google</Btn>
+      <Btn style={buttonWithMarginTop} onPress={signinWithGoogle}>Login with Google</Btn>
     </View>
   )
 

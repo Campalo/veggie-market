@@ -17,7 +17,7 @@ function ProductList() {
     navigation.setOptions({ headerRight: () => {
       return (
         <View>
-          <Btn onPress={() => navigation.navigate('Auth')}>Login / Logout</Btn>
+          <Link style={button} to="/Auth">Login/Logout</Link>
         </View>
       )
     }});
@@ -75,7 +75,9 @@ function ProductList() {
       >
       </FlatList>
       <Animated.View key={products.length} style={{ transform: [{ scale: initialValue }], opacity: initialValue }}>
-        <Link style={button} to="/Create">Add</Link>
+        <View>
+          <Link style={button} to="/Create">Add</Link>
+        </View>
       </Animated.View>
     </View>
   )

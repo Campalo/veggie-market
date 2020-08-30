@@ -8,10 +8,10 @@ import { useButton } from '../../../common/theme/button';
 
 const ProfileScreen = () => {
   const toggleMode = useToggleMode();
-  const { buttonWrapper } = useButton();
+  const { buttonWithMarginTop } = useButton();
 
   return  (
-    <View style={buttonWrapper}>
+    <View style={buttonWithMarginTop}>
         <Btn onPress={toggleMode}>Change Theme</Btn>
     </View>
    )
