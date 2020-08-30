@@ -7,6 +7,7 @@ import {useButton} from '../../common/theme/button';
 import { useTypography } from "../../common/theme/typography";
 import { density } from "../../common/theme/theme";
 import { Link, useNavigation } from '@react-navigation/native';
+import { useImgPicker } from '../../common/theme/imgPicker';
 
 
 interface Credential {
@@ -15,10 +16,10 @@ interface Credential {
 }
 
 const SignupScreen = () => {
-  const navigation = useNavigation();
-  const {buttonWithMarginTop } = useButton();
+  const {button, buttonWithMarginTop } = useButton();
   const { text, subtitle } = useTypography();
   const [user, setUser] = useState<User | null>(null);
+  const { avatar, avatarCentered } = useImgPicker();
 
   useEffect(() => {
     auth().onAuthStateChanged((user) => setUser(user))
@@ -38,16 +39,16 @@ const SignupScreen = () => {
   const renderAvatar = (
     <View>
       <Image
-        style={{width: 100, height: 100, borderRadius: 50, marginVertical: 2 * density, display: "flex", alignSelf: "center"}}
-        source={require("../../common/assets/undraw_profile.png")}
+        style={[avatar, avatarCentered]}
+        source={ user ? {uri: user?.photoURL } : require("../../common/assets/undraw_profile.png")}
       />
       <Text style={[subtitle, {justifyContent: "center"}]}>
         Welcome {user?.displayName}
       </Text>
       <Text style={[subtitle, {justifyContent: "center", paddingBottom: 2 * density}]}>
-      You're connected now
+      You're connected
       </Text>
-        <Link style={buttonWithMarginTop} to="/Profile">Go to Profile and Settings</Link>
+        <Link style={[button, buttonWithMarginTop]} to="/Profile">Go to Profile and Settings</Link>
         <Btn onPress={signout}>Logout</Btn>
     </View>
   )

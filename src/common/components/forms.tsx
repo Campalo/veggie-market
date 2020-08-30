@@ -174,10 +174,10 @@ export const ImgPicker: FunctionComponent<ImgPickerProps> = ({ name, control, de
 
   /** The image picker component */
   const imgPicker = ({ onChange, value }: ControlData<string>) => {
-    const { productAvatar } = useImgPicker();
+    const { avatar } = useImgPicker();
     return (
     <View style={{alignItems: 'center', justifyContent: 'center'}}>
-      <Image source={{ uri: value }} style={ productAvatar } />
+      <Image source={ value ? { uri: value } : require("../assets/undraw_upload.png")} style={ avatar } />
       <Btn onPress={() => pickImg(onChange)}>Pick an image</Btn>
     </View>
     )

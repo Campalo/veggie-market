@@ -11,7 +11,7 @@ const ProductFormFields = (
     }) => {
 
     return (
-        <Form defaultValues={product || null} onSubmit={onSubmit}>
+        <Form defaultValues={product} onSubmit={onSubmit}>
             <ImgPicker name="image"/>
             <Label>Product Name</Label>
             <Input name="name" placeholder="Name of the product" />
