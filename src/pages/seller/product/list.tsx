@@ -5,19 +5,20 @@ import { Link, useNavigation } from '@react-navigation/native';
 import { useList } from '../../../common/theme/list';
 import { useButton } from '../../../common/theme/button';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Btn } from '../../../common/components/btn';
+import { useTranslation} from "react-i18next";
 
 function ProductList() {
   const navigation = useNavigation();
   const products = useCollection("products");
   const { list, listItem, itemTitle, itemSubtitle, itemAvatar } = useList();
   const { button } = useButton();
+  const { t } = useTranslation();
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerRight: () => {
       return (
         <View>
-          <Link style={button} to="/Auth">Login/Logout</Link>
+          <Link style={button} to="/Auth">{t("login")} / {t("logout")}</Link>
         </View>
       )
     }});
@@ -59,7 +60,7 @@ function ProductList() {
           <View style={{ flexDirection: 'row' }}>
             <Text style={itemSubtitle}>{item.price}€ / {item.unit}</Text>
             <Text style={itemSubtitle}> - </Text>
-            <Text style={itemSubtitle}>{item.stock} {item.unit} in stock</Text>
+            <Text style={itemSubtitle}>{item.stock} {item.unit} {t("seller.product.stock")}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -76,7 +77,7 @@ function ProductList() {
       </FlatList>
       <Animated.View key={products.length} style={{ transform: [{ scale: initialValue }], opacity: initialValue }}>
         <View>
-          <Link style={button} to="/Create">Add</Link>
+          <Link style={button} to="/Create">{t("seller.product.add")}</Link>
         </View>
       </Animated.View>
     </View>
