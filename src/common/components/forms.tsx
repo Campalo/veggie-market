@@ -110,6 +110,7 @@ export const Select: FunctionComponent<SelectProps> = ({ name, options, control,
     </Picker>
   );
 
+  // TOOD: Display a placeholder when default value is null | undefined
   return <Controller
     name={name}
     defaultValue={defaultValue}
