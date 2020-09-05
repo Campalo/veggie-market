@@ -5,6 +5,7 @@ import { converter, FormProduct } from '../../../common/types/product.model';
 import { firestore } from 'firebase';
 import { Btn } from '../../../common/components/btn';
 import ProductFormFields from './form';
+import { useTranslation } from 'react-i18next';
 
 
 function EditScreen() {
@@ -12,6 +13,7 @@ function EditScreen() {
   const { id } = useRoute().params as { id: string };
   const [product, setProduct] = useState<FormProduct>();
   const doc = firestore().doc(`products/${id}`).withConverter(converter);
+  const { t } = useTranslation();
 
   useEffect(() => {
     firestore().doc(`products/${id}`).withConverter(converter).get()
@@ -20,7 +22,7 @@ function EditScreen() {
   }, [id]);
 
   useLayoutEffect(() => {
-    navigation.setOptions({ headerRight: () => <Btn onPress={remove}>Delete</Btn> });
+  navigation.setOptions({ headerRight: () => <Btn onPress={remove}>{t("seller.product.delete")}</Btn> });
   }, [navigation]);
 
   const edit = async (product: any) => {
@@ -33,12 +35,12 @@ function EditScreen() {
   }
 
   if (!product) {
-    return <Text>Loading...</Text>
+    return <Text>{t("loading")}</Text>
   }
 
   return (
     <View>
-      <ProductFormFields onSubmit={edit} submitLabel="Update Product" product={product}/>
+      <ProductFormFields onSubmit={edit} submitLabel={t("seller.product.update")} product={product}/>
     </View>
   )
 }

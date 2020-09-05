@@ -6,8 +6,9 @@ import { Btn } from "../../common/components/btn";
 import {useButton} from '../../common/theme/button';
 import { useTypography } from "../../common/theme/typography";
 import { density } from "../../common/theme/theme";
-import { Link, useNavigation } from '@react-navigation/native';
+import { Link } from '@react-navigation/native';
 import { useImgPicker } from '../../common/theme/imgPicker';
+import { useTranslation } from "react-i18next";
 
 
 interface Credential {
@@ -20,6 +21,7 @@ const SignupScreen = () => {
   const { text, subtitle } = useTypography();
   const [user, setUser] = useState<User | null>(null);
   const { avatar, avatarCentered } = useImgPicker();
+  const { t } = useTranslation();
 
   useEffect(() => {
     auth().onAuthStateChanged((user) => setUser(user))
@@ -43,27 +45,27 @@ const SignupScreen = () => {
         source={ user ? {uri: user?.photoURL } : require("../../common/assets/undraw_profile.png")}
       />
       <Text style={[subtitle, {justifyContent: "center"}]}>
-        Welcome {user?.displayName}
+        {t("signup.welcome")} {user?.displayName}
       </Text>
       <Text style={[subtitle, {justifyContent: "center", paddingBottom: 2 * density}]}>
-      You're connected
+      {t("signup.connected")}
       </Text>
-        <Link style={[button, buttonWithMarginTop]} to="/Profile">Go to Profile and Settings</Link>
-        <Btn onPress={signout}>Logout</Btn>
+        <Link style={[button, buttonWithMarginTop]} to="/Profile">{t("signup.profileandSettings")}</Link>
+        <Btn onPress={signout}>{t("logout")}</Btn>
     </View>
   )
 
   const renderForm = (
     <View>
       <Form onSubmit={signup}>
-        <Label>Email</Label>
-        <Input name="email" placeholder="Your email" />
-        <Label>Password</Label>
-        <Input name="password" placeholder="Your password" secureTextEntry={true}/>
-        <Submit>Signup</Submit>
+        <Label>{t("signup.email")}</Label>
+        <Input name="email" placeholder={t("signup.emailPlaceholder")} />
+        <Label>{t("signup.password")}</Label>
+        <Input name="password" placeholder={t("signup.passwordPlaceholder")} secureTextEntry={true}/>
+        <Submit>{t("signup.signup")}</Submit>
       </Form>
-      <Text style={[text, {paddingTop: 2 * density, textAlign: "center"}]}>Or</Text>
-      <Btn style={buttonWithMarginTop} onPress={signinWithGoogle}>Login with Google</Btn>
+      <Text style={[text, {paddingTop: 2 * density, textAlign: "center"}]}>{t("signup.or")}</Text>
+      <Btn style={buttonWithMarginTop} onPress={signinWithGoogle}>{t("signup.loginWithGoogle")}</Btn>
     </View>
   )
 

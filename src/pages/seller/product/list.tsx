@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, FunctionComponent } from 'react';
 import { Text, View, Image, FlatList, Animated, Easing } from 'react-native';
 import { useCollection } from "../../../firestore";
 import { Link, useNavigation } from '@react-navigation/native';
@@ -6,6 +6,7 @@ import { useList } from '../../../common/theme/list';
 import { useButton } from '../../../common/theme/button';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useTranslation} from "react-i18next";
+import { getUnitLabel, Product } from "../../../common/types/product.model";
 
 function ProductList() {
   const navigation = useNavigation();
@@ -50,17 +51,19 @@ function ProductList() {
 
   Animated.stagger(400, [...ItemAnimations, LinkAnimation]).start();
 
+  const unitLabel = getUnitLabel();
 
-  const renderProduct = ({ item, index }: any) => (
+
+  const renderProduct : FunctionComponent<{item: Product, index: number}> = ({ item, index }) => (
     <Animated.View key={index} style={{ opacity: initialValues[index] }}>
       <TouchableOpacity style={listItem} onPress={() => navigation.navigate('Edit', { id: item.id })}>
         <Image style={itemAvatar} source={{ uri: item.image }} />
         <View>
           <Text style={itemTitle}>{item.name}</Text>
           <View style={{ flexDirection: 'row' }}>
-            <Text style={itemSubtitle}>{item.price}€ / {item.unit}</Text>
+            <Text style={itemSubtitle}>{item.price}€ / {unitLabel[item.unit]}</Text>
             <Text style={itemSubtitle}> - </Text>
-            <Text style={itemSubtitle}>{item.stock} {item.unit} {t("seller.product.stock")}</Text>
+            <Text style={itemSubtitle}>{item.stock} {unitLabel[item.unit]} {t("seller.product.available")}</Text>
           </View>
         </View>
       </TouchableOpacity>

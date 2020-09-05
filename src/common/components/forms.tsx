@@ -8,6 +8,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Btn } from './btn';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useImgPicker } from '../theme/imgPicker';
+import { useTranslation } from "react-i18next";
 
 interface ControlData<T = any> {
   onChange: (data: T) => void;
@@ -175,10 +176,11 @@ export const ImgPicker: FunctionComponent<ImgPickerProps> = ({ name, control, de
   /** The image picker component */
   const imgPicker = ({ onChange, value }: ControlData<string>) => {
     const { avatar } = useImgPicker();
+    const { t } = useTranslation();
     return (
     <View style={{alignItems: 'center', justifyContent: 'center'}}>
       <Image source={ value ? { uri: value } : require("../assets/undraw_upload.png")} style={ avatar } />
-      <Btn onPress={() => pickImg(onChange)}>Pick an image</Btn>
+      <Btn onPress={() => pickImg(onChange)}>{t("pickImage")}</Btn>
     </View>
     )
   };
