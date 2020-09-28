@@ -6,7 +6,7 @@ export default {
     changeTheme: "Change Theme",
     pickImage: "Pick an image",
 
-    profile: {
+    signup: {
       welcome: "Welcome",
       connected: "You're connected",
       profileandSettings: "Go to Profile and Settings",
