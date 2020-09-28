@@ -1,5 +1,5 @@
 import React, { Children, FunctionComponent, cloneElement, ReactText } from 'react';
-import { TextInput, TextInputProps, Text, View, Image } from "react-native";
+import { TextInput, TextInputProps, Text, View, Image, Switch } from "react-native";
 import { useForm, Controller, UseFormMethods } from "react-hook-form";
 import { Picker } from '@react-native-community/picker';
 import { useInput } from '../theme/input';
@@ -9,6 +9,8 @@ import { Btn } from './btn';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useImgPicker } from '../theme/imgPicker';
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@react-navigation/native";
+import { Theme } from '../theme/theme';
 
 interface ControlData<T = any> {
   onChange: (data: T) => void;
@@ -30,7 +32,7 @@ export const Form: FunctionComponent<FormProps> = ({ defaultValues, children, on
   const submit = handleSubmit(onSubmit);
 
   const controls = Children.map(children, (child: any, key: number) => {
-    if (![Input, Select, ImgPicker, Submit, Label].includes(child.type)) {
+    if (![Input, Select, ImgPicker, Submit, Label, Toggle].includes(child.type)) {
       throw new Error('Form does not support type ' + child.type.name);
     }
 
@@ -38,6 +40,7 @@ export const Form: FunctionComponent<FormProps> = ({ defaultValues, children, on
     switch (child.type) {
       case Input:
       case ImgPicker:
+      case Toggle:
       case Select: return cloneElement(child, { ...child.props, control, errors, defaultValue, key });
       case Submit: return cloneElement(child, { ...child.props, submit, key });
       case Label: return child;
@@ -132,6 +135,28 @@ export const Submit: FunctionComponent<any> = ({ children, submit }) => <Btn onP
 export const Label: FunctionComponent<any> = ({ children }) => {
   const { label } = useTypography();
   return <Text style={label}>{children}</Text>
+}
+
+////////////
+// TOGGLE //
+////////////
+
+export const Toggle: FunctionComponent<any> = ({name, defaultValue, control}) => {
+  const theme = useTheme() as Theme;
+    const toggle = ({ value, onChange }: ControlData<boolean>) => (
+      <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+        <Switch
+          thumbColor={value ? theme.colors.primary : theme.colors.primaryContrast}
+          trackColor={{ false: theme.colors.secondary, true: theme.colors.primary }}
+          ios_backgroundColor= {theme.colors.secondaryContrast}
+          onValueChange={onChange}
+          value={value}
+        />
+      </View>
+    );
+
+    return <Controller name={name} defaultValue={defaultValue} control={control} render={toggle} />
+
 }
 
 ////////////////
