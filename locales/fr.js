@@ -43,7 +43,9 @@ export default {
 
     buyer: {
       product: {},
-      profile: {},
+      profile: {
+        becomeSeller: "Je souhaite devenir vendeur"
+      },
     }
   }
 }
