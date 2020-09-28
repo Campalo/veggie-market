@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { useButton } from "../theme/button";
-import { Text, StyleSheet } from "react-native";
+import { Text } from "react-native";
 
 
 interface BtnProps {

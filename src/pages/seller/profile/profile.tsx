@@ -5,6 +5,7 @@ import { useToggleMode } from '../../../common/theme/theme';
 import { useButton } from '../../../common/theme/button';
 import { useTranslation } from 'react-i18next';
 import * as firebase from 'firebase';
+import { Separator } from "../../../common/components/separator";
 
 
 
@@ -24,9 +25,10 @@ const ProfileScreen = () => {
 
 
   return  (
-    <View style={buttonWithMarginTop}>
+    <View style={[buttonWithMarginTop, {flex: 1, alignItems: "stretch"}]}>
+        <Btn onPress={createSeller}>{t("buyer.profile.becomeSeller")}</Btn>
+        <Separator />
         <Btn onPress={toggleMode}>{t("changeTheme")}</Btn>
-        <Btn style={buttonWithMarginTop} onPress={createSeller}>{t("buyer.profile.becomeSeller")}</Btn>
     </View>
    )
 }
