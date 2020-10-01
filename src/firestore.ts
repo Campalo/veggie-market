@@ -40,8 +40,10 @@ export const useDocument = <T extends object>(collectionName: CollectionName, do
     const [value, setValue] = useState<T>({} as any);
     useEffect(() => {
         return firestore().collection(collectionName).doc(documentID).onSnapshot((snapshot) => {
-            const data = dataDoc(snapshot)
-            setValue(data as any);
+            if(snapshot.exists){
+                const data = dataDoc(snapshot);
+                setValue(data as any);
+            }
         })
     }, [collectionName, documentID])
     return value;

@@ -3,15 +3,16 @@ import { Form, Input, Submit, Select, Label, ImgPicker } from '../../../common/c
 import { FormProduct, getUnitLabel } from '../../../common/types/product.model';
 import { useTranslation } from "react-i18next";
 
-const ProductFormFields = (
-    { onSubmit, submitLabel, product } :
-    {
-        onSubmit: (product: FormProduct) => Promise<void>;
-        submitLabel: string;
-        product?: any;
-    }) => {
-    const { t } = useTranslation();
+type ProductForm = {
+    onSubmit: (product: FormProduct) => Promise<void>;
+    submitLabel: string;
+    product?: any;
+}
 
+const ProductFormFields = (
+    { onSubmit, submitLabel, product } : ProductForm
+) => {
+    const { t } = useTranslation();
     const options = getUnitLabel();
 
     return (
