@@ -38,7 +38,15 @@ export default {
           unit: "unités",
         }
       },
-      profile:{},
+      profile:{
+        name: "Nom",
+        namePlaceholder: "Votre nom ou celui de votre entreprise",
+        email: "Email",
+        emailPlaceholder: "Votre email",
+        bio: "Bio",
+        bioPlaceholder: "Dites nous en un peu plus sur votre entreprise",
+        update: "Mettre à jour le profil",
+      },
     },
 
     buyer: {

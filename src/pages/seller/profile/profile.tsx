@@ -46,7 +46,7 @@ const ProfileScreen = () => {
           <Label>{t("seller.profile.name")}</Label>
           <Input name="displayName" placeholder={t("seller.profile.namePlaceholder")}/>
           <Label>{t("seller.profile.email")}</Label>
-          <Input name="email" placeholder={t("seller.profile.email.placeholder")}/>
+          <Input name="email" placeholder={t("seller.profile.emailPlaceholder")}/>
           <Label>{t("seller.profile.bio")}</Label>
           <Input name="bio" placeholder={t("seller.profile.bioPlaceholder")}/>
           <Submit>{t("seller.profile.update")}</Submit>

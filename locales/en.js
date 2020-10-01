@@ -37,7 +37,15 @@ export default {
           kg: "kg",
           unit: "unit",
         }      },
-      profile: {},
+      profile:{
+        name: "Name",
+        namePlaceholder: "Your name or the one of your company",
+        email: "Email",
+        emailPlaceholder: "Your email",
+        bio: "Bio",
+        bioPlaceholder: "Tell us more about your company",
+        update: "Update my profile",
+      },
     },
 
     buyer: {
